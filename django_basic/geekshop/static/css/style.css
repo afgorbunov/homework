@@ -1,0 +1,16 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+    color: blue;
+}
+
+.active {
+    color: green;
+}
+
+ul.menu li a {
+    text-decoration: none;
+}
