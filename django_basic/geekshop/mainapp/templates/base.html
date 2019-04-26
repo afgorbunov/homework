@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock title %}Магазин компьютерных комплектующих &#171;Кнопка&#187;</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    {% block css %}{% endblock css %}
+</head>
+
+<body>
+    <header>
+        <img id="logo" src="{% static 'img/logo.png' %}" alt="">
+        {% include 'menu.html' %}
+    </header>
+    <div class="container">
+        {% block content %}
+        {% endblock content %}
+    </div>
+    <footer>
+        {% block footer %}
+        <p>Все права защищены &#169; 2019</p>
+        {% endblock footer %}
+    </footer>
+</body>
+
+</html>

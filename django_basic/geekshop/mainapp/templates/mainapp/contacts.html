@@ -1,16 +1,28 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Контакты</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
-</head>
+{% extends "base.html" %}
 
-<body>
-    <ul class="menu">
-        <li><a href="/">домой</a></li>
-        <li><a href="/products/">продукты</a></li>
-        <li><a href="/contacts/" class="active">контакты</a></li>
-    </ul>
-    <h1>Контакты</h1>
-</body></html>
+{% block title %}Контакты | {% endblock title %}
+
+{% block content %}
+        <h1>Контакты</h1>
+
+        <h3>Обратная связь</h3>
+        <form action="#">
+            <p><label for="name">Имя</label> <input type="text" id="name"></p>
+            <p><label for="family">Фамилия</label> <input type="text" id="family"></p>
+            <p><label for="phone">Контактный номер телефона</label> <input type="text" id="phone" placeholder="+7 ХХХ ХХХ-ХХ-ХХ"></p>
+            <p><label for="phone">Контактный e-mail</label> <input type="text" id="email" placeholder="email@example.com"></p>
+            <p><label for="message">Сообщение</label><br><textarea name="message" id="message" cols="50" rows="10" placeholder="Введите здесь текст своего сообщения"></textarea></p>
+            <p>Вам понравился наш магазин?<br>
+                <input type="radio" name="group" id="yes" checked><label for="yes">Да</label>
+                <input type="radio" name="group" id="no"><label for="no">Нет</label>
+                <input type="radio" name="group" id="hz"><label for="hz">Не знаю</label>
+            </p>
+            <input type="submit"> <input type="reset" value="Очистить">
+        </form>
+
+        <h3>Как нас найти</h3>
+        <h4>Адрес</h4>
+        <p>Россия, Москва, Красная площадь, 1</p>
+        <h4>Карта</h4>
+        <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Acad73d3109678908402c24d5f2d32ce54dcafc4ebc1f5dc38f51ed6fb1c069e7&amp;width=840&amp;height=374&amp;lang=ru_RU&amp;scroll=true" class="map"></script>
+{% endblock content %}

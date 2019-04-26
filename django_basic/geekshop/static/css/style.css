@@ -1,16 +1,189 @@
-* {
+body {
+    background-color: #f8f8f8;
+    font-family: sans-serif;
+}
+
+header {
+    height: 75px;
+    background-image: url(img/background.jpg)
+}
+
+.container {
+    width: 840px;
+    margin: 0px auto;
+}
+
+.mainmenu {
     padding: 0;
+    text-align: right;
     margin: 0;
 }
 
-h1 {
+.mainmenu li {
+    list-style-type: none;
+    display: inline-block;
+}
+
+.mainmenu a {
+    color: grey;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+.mainmenu a:hover {
+    background-color: dimgrey;
+    color: #f8f8f8;
+}
+
+h3 {
+    color: black;
+    font-size: 18px;
+    font-weight: 400;
+    background-color: #eaeaea;
+}
+
+.brief.description {
+    color: #707070;
+    font-size: 14px;
+    font-style: italic;
+    line-height: 16px;
+    padding-left: 220px;
+}
+
+.full.description {
+    color: #484343;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+}
+
+button.buy {
+    margin-left: 20px;
+    padding: 10px 20px;
+    background-color: #F4CFFD;
+    border-radius: 5px;
+    border: 1px solid #C400FA;
+    color: #C400FA;
+    font-weight: bold;
+    font-size: 14pt;
+}
+
+button.buy:hover {
+    background-color: #C400FA;
+    color: #F4CFFD;
+}
+
+button.buy:active {
+    background-color: white;
+    color: #C400FA;
+}
+
+.description::first-letter {
+    color: red;
+    font-weight: bold;
+}
+
+.characteristics li {
+    list-style-image: url(img/list_marker.png);
+    font-size: 14px;
+    color: #777;
+}
+
+.characteristics li span {
+    display: inline-block;
+    padding-right: 15px;
+    color: darkgreen;
+}
+
+label {
+    display: inline-block;
+    width: 150px;
+}
+
+input[type="text"] {
+    padding: 5px;
+    width: 300px;
+    font-size: 12px;
+    color: darkgreen;
+    text-transform: capitalize;
+}
+
+input#email:focus {
+    background-color: #fcf;
     color: blue;
 }
 
-.active {
-    color: green;
+textarea {
+    width: 100%;
+    font-family: sans-serif;
+    font-size: 14px;
 }
 
-ul.menu li a {
+img.goodprev {
+    outline: 2px solid grey;
+    float: left
+}
+
+img:hover {
+    outline: none;
+}
+
+
+img#logo {
+    outline: none;
+    margin: 5px;
+    float: left;
+}
+
+td,
+th {
+    text-align: center;
+    border: 1px solid grey;
+    padding: 2px 5px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table tr:first-of-type {
+    height: 40px;
+}
+
+.clr {
+    float: none;
+    clear: both;
+}
+
+.map {
+    width: 100%;
+}
+
+.catalog .card {
+    float: left;
+    border: 1px solid #C400FA;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 5px;
     text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+    color: #C400FA;
+}
+
+.catalog .card img {
+    width: 150px;
+    margin: 0 0 10px 0;
+}
+
+footer {
+    height: 50px;
+    background-color: #F4CFFD;
+    padding: 5px;
+    text-align: right;
+    margin-top: 10px;
 }
