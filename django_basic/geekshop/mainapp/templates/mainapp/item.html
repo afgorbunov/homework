@@ -4,7 +4,7 @@
 {% block title %}Товар "{{ good.caption|title }}" |{% endblock title %}
 
 {% block content %}
-    <a href="{% url 'catalog' %}">Назад</a>
+    <a href="{% url 'catalog:index' %}">Назад</a>
 
     <h1>{{ good.caption|title }}</h1>
     <h3>Описание товара</h3>

@@ -7,7 +7,7 @@
     <h1>Каталог товаров</h1>
     <div class="catalog">
     {% for g in goods %}
-        <a class="card" href="{% url 'item' g.id %}"><img src="{% static g.img %}" alt="" width="50"><br>{{ g.caption }}</a>
+        <a class="card" href="{% url 'catalog:item' g.id %}"><img src="{% static g.img %}" alt="" width="50"><br>{{ g.caption }}</a>
     {% endfor %}
         <div class="clr"></div>
     </div>
