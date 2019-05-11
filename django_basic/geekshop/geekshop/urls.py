@@ -21,6 +21,6 @@ urlpatterns = [
     path('', mainapp.main, name='main'),
     path('catalog/', include('mainapp.urls', namespace='catalog')),
     path('contacts/', mainapp.contacts, name='contacts'),
+    path('auth/', include('authapp.urls', namespace='auth')), 
     path('admin/', admin.site.urls),
-    path('load/<str:dataset>', mainapp.load_data, name='load'),
 ]

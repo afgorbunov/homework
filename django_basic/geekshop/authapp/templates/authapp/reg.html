@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<form action="{% url 'auth:reg' %}" class="form-horizontal" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ register_form.as_p }}
+    <br>
+    <input type="submit" value="зарегистрироваться" class="form-control">
+</form>
+{% endblock content %}

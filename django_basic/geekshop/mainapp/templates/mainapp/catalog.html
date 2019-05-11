@@ -5,10 +5,19 @@
 
 {% block content %}
     <h1>Каталог товаров</h1>
-    <div class="catalog">
-    {% for g in goods %}
-        <a class="card" href="{% url 'catalog:item' g.id %}"><img src="{% static g.img %}" alt="" width="50"><br>{{ g.caption }}</a>
+    {% for cat, goods in data.items %}
+        <h3><a href="{% url 'catalog:category' cat.id %}">Категория "{{ cat.caption }}"</a></h3>
+        <div class="row">
+            {% for g in goods %}
+                <div class="card">
+                    <div class="section img">
+                        <img src="{% static g.get_image_path %}" alt="">
+                    </div>
+                    <div class="section title"><a href="{% url 'catalog:item' g.id %}">{{ g.caption }}</a></div>
+                    <div class="section">{{ g.brief_description }}</div>
+                </div>
+            {% endfor %}
+            <div class="clr"></div>
+        </div>
     {% endfor %}
-        <div class="clr"></div>
-    </div>
 {% endblock content %}

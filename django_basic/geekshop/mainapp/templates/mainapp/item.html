@@ -4,21 +4,21 @@
 {% block title %}Товар "{{ good.caption|title }}" |{% endblock title %}
 
 {% block content %}
-    <a href="{% url 'catalog:index' %}">Назад</a>
+    <a href="{% url 'catalog:category' good.category.id%}">К категории</a> | <a href="{% url 'catalog:index' %}">К каталогу</a>
 
     <h1>{{ good.caption|title }}</h1>
     <h3>Описание товара</h3>
-    <a href="{% static good.img %}" target="_blank"><img src="{% static good.img %}" alt="{{ good.caption|title }}" width="200" class="goodprev"></a>
+    <a href="{% static good.get_image_path %}" target="_blank"><img src="{% static good.get_image_path %}" alt="{{ good.caption|title }}" width="200" class="goodprev"></a>
     <p class="brief description">{{ good.brief_description }}</p>
     <button class="buy">Купить</button>
     <div class="clr"></div>
     <h3>Подробное описание товара</h3>
-    <p class="full description">{{ good.full_description }}</p>
+    <p class="full description">{{ good.full_description|linebreaks }}</p>
 
     <h3>Характеристики товара</h3>
     <ul class="characteristics">
-    {% for ch in good.characteristics %}
-        <li><span><b>{{ ch.0 }} </b></span>{{ ch.1 }}</li>
+    {% for ch in characteristics %}
+        <li><span><b>{{ ch.caption }} </b></span>{{ ch.value }}</li>
     {% endfor %}
     </ul>
 {% endblock content %}
