@@ -1,3 +1,5 @@
 /.eric6project/
 /.ropeproject/
 *.sqlite3
+/.vscode/
+*.e4p

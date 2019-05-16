@@ -10,7 +10,7 @@ class GoodCharTemple(models.Model):
     caption = models.CharField(verbose_name='название', max_length=255)
     category = models.ForeignKey(
         'GoodsCategory', models.CASCADE, verbose_name='категория')
-    
+
     def __str__(self):
         return f'"{self.caption}" для "{self.category.caption}"'
 
@@ -44,12 +44,17 @@ class Good(models.Model):
     image = models.ImageField(verbose_name='изображение', blank=True)
     category = models.ForeignKey(
         GoodsCategory, models.CASCADE, verbose_name='категория')
+    price = models.FloatField('цена', blank=False, null=False, default=0)
 
     def __str__(self):
         return self.caption
-    
+
     def get_image_path(self):
         return str(self.image)
+
+    def str_price(self, ):
+        return '{:,.2f}'.format(self.price).replace(',', ' ').replace('.', ',')+' руб.'
+
 
 class GoodСharacteristic(models.Model):
 

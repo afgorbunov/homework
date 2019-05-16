@@ -1,23 +1,26 @@
 {% extends "base.html" %}
 {% load static %}
+{% load l10n %}
 
 {% block title %}Каталог | {% endblock title %}
 
 {% block content %}
-    <h1>Каталог товаров</h1>
-    {% for cat, goods in data.items %}
-        <h3><a href="{% url 'catalog:category' cat.id %}">Категория "{{ cat.caption }}"</a></h3>
-        <div class="row">
-            {% for g in goods %}
-                <div class="card">
-                    <div class="section img">
-                        <img src="{% static g.get_image_path %}" alt="">
-                    </div>
-                    <div class="section title"><a href="{% url 'catalog:item' g.id %}">{{ g.caption }}</a></div>
-                    <div class="section">{{ g.brief_description }}</div>
-                </div>
-            {% endfor %}
-            <div class="clr"></div>
+<h1>Каталог товаров</h1>
+{% for cat, goods in data.items %}
+<h3><a href="{% url 'catalog:category' cat.id %}">Категория "{{ cat.caption }}"</a></h3>
+<div class="row">
+    {% for g in goods %}
+    <div class="card">
+        <div class="section img">
+            <img src="{% static g.get_image_path %}" alt="">
         </div>
+        <div class="section title"><a href="{% url 'catalog:item' g.pk %}">{{ g.caption }}</a></div>
+        <div class="section">{{ g.brief_description }}</div>
+        <div class="price section">{{ g.str_price }}</div>
+        <div class="section"><a href="{% url 'basket:add' g.pk %}" class="buy">Купить</a></div>
+    </div>
     {% endfor %}
+    <div class="clr"></div>
+</div>
+{% endfor %}
 {% endblock content %}

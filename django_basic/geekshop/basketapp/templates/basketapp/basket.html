@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+    
+    <table>
+        <tr>
+            <th>Категория</th>
+            <th>Товар</th>
+            <th>Количество</th>
+            <th>Цена</th>
+            <th>Стоимость</th>
+        </tr>
+    {% for item in basket %}
+        <tr>
+            <td><a href="{% url 'catalog:category' item.good.category.pk %}">{{item.good.category.caption}}</a></td>
+            <td><a href="{% url 'catalog:item' item.good.pk %}">{{item.good.caption}}</a></td>
+            <td>{{item.quantity}}</td>
+            <td>{{item.good.str_price}}</td>
+            <td>{{item.get_total_price}}</td>
+        </tr>
+    {% endfor %}
+    </table>
+        
+{% endblock content %}
+    

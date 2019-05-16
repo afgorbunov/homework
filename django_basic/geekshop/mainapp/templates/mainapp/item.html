@@ -10,7 +10,8 @@
     <h3>Описание товара</h3>
     <a href="{% static good.get_image_path %}" target="_blank"><img src="{% static good.get_image_path %}" alt="{{ good.caption|title }}" width="200" class="goodprev"></a>
     <p class="brief description">{{ good.brief_description }}</p>
-    <button class="buy">Купить</button>
+    <p class="price large">{{good.price}}</p>
+    <a href="{% url 'basket:add' good.pk %}" class="button buy">Купить</a>
     <div class="clr"></div>
     <h3>Подробное описание товара</h3>
     <p class="full description">{{ good.full_description|linebreaks }}</p>

@@ -1,3 +1,5 @@
 <a href="{% url 'main' %}">Главная</a>
 <a href="{% url 'catalog:index' %}">Каталог</a>
 <a href="{% url 'contacts' %}">Контакты</a>
+<a href="{% url 'basket:view' %}" class="basket">Карзина{% if basket %} <span>({{ basket.0.get_all_total_quantity }}
+        товаров на сумму {{ basket.0.get_all_total_price }})</span>{% endif %}</a>
