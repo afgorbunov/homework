@@ -3,25 +3,28 @@
 
 
 {% block content %}
-    
-    <table>
+
+<!-- <table>
         <tr>
             <th>Категория</th>
             <th>Товар</th>
             <th>Количество</th>
             <th>Цена</th>
             <th>Стоимость</th>
+            <th>Удалить</th>
         </tr>
     {% for item in basket %}
         <tr>
             <td><a href="{% url 'catalog:category' item.good.category.pk %}">{{item.good.category.caption}}</a></td>
             <td><a href="{% url 'catalog:item' item.good.pk %}">{{item.good.caption}}</a></td>
-            <td>{{item.quantity}}</td>
+            <td><input type="number" min="0" value="{{item.quantity}}" class="godds_quantity"></td>
             <td>{{item.good.str_price}}</td>
             <td>{{item.get_total_price}}</td>
+            <td><a href="{% url 'basket:remove' item.good.pk %}" class="button">Удалить</a></td>
         </tr>
-    {% endfor %}
-    </table>
-        
+    {% endfor %} 
+</table> -->
+<div class="basket_list">{% include 'basketapp/includes/inc_basket_list.html' %}</div>
+<button class="btn btn-round"><a href="{% url 'main' %}">на гравную</a></button>
+
 {% endblock content %}
-    
