@@ -7,7 +7,6 @@
     <title>{% block title %}{% endblock title %}Магазин компьютерных комплектующих &#171;Кнопка&#187;</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="https://cdn.rawgit.com/Chalarangelo/mini.css/v3.0.1/dist/mini-default.min.css">
-    <!-- <link rel="stylesheet" href="https://unpkg.com/picnic"> -->
     {% block css %}{% endblock css %}
 </head>
 
@@ -19,15 +18,14 @@
         <div class="col-sm user">
             {% if user.is_authenticated %}
             <div class="row">
-                {% if user.avatar_path %}<div class="col-sm-5"><img src="{% static user.avatar_path %}" alt=""></div>
-                {% endif %}
+                {% if user.avatar_path %}<div class="col-sm-5"><img src="{% static user.avatar_path %}" alt=""></div>{% endif %}
                 <div class="col-sm">
                     <p><a href="{% url 'auth:userinfo' user.username %}">{{ user.username }}</a></p>
                     <p><a href="{% url 'auth:logout' %}">Выйти</a></p>
                 </div>
             </div>
             {% else %}
-            <a href="{% url 'auth:reg' %}">Регистрация</a> |
+            <a href="{% url 'auth:reg' %}">Регистрация</a> | 
             <a href="{% url 'auth:login' %}">Войти</a>
             {% endif %}
         </div>
@@ -47,9 +45,6 @@
         <small>Все права защищены &#169; 2019</small>
         {% endblock footer %}
     </footer>
-
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="{% static 'js/basket-script.js' %}"></script>
 </body>
 
 </html>
