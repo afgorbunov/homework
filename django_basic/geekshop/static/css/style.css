@@ -75,3 +75,8 @@ nav {
 .user {
     text-align: right;
 }
+
+input.godds_quantity {
+    width: 100px;
+    text-align: right;
+}
