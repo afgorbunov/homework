@@ -1,16 +1,77 @@
-* {
-    padding: 0;
-    margin: 0;
+@media only screen and (min-width: 320px) {
+    .container {
+        width: auto;
+    }
 }
 
-h1 {
-    color: blue;
+@media only screen and (min-width: 420px) {
+    .container {
+        width: 400;
+    }
 }
 
-.active {
-    color: green;
+@media only screen and (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
 }
 
-ul.menu li a {
-    text-decoration: none;
+@media only screen and (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+
+}
+
+@media only screen and (min-width: 1320px) {
+    .container {
+        width: 1300px;
+    }
+}
+
+body {
+    background-color: #f8f8f8;
+}
+
+header {
+    height: auto !important;
+}
+
+footer {
+    height: auto;
+    background-color: #4d4d4d;
+}
+
+nav {
+    min-width: 95px;
+}
+
+.main {
+    background-color: #f8f8f8;
+    border: .0625rem solid #ddd;
+    border-radius: .125rem;
+    margin: .5rem;
+    padding: .5rem 1em !important;
+}
+
+.card .section {
+    text-align: center;
+}
+
+.card .title {
+    background-color: #ddd !important;
+}
+
+.section img {
+    max-height: 250px;
+}
+
+.user {
+    text-align: right;
 }

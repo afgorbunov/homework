@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Пользователь "{{ human.username }}" |{% endblock title %}
+
+{% block content %}
+    <h1>Пользователь "{{ human.username }}"</h1>
+    <button><a href="{% url 'auth:useredit' human.username %}">Редактировать</a></button>
+    <p><strong>Имя: </strong>{{ human.first_name }}</p>
+    <p><strong>Фамилия: </strong>{{ human.second_name }}</p>
+    <p><strong>Возраст: </strong>{{ human.age }}</p>
+{% endblock content %}

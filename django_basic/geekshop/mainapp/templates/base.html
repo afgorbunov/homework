@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock title %}Магазин компьютерных комплектующих &#171;Кнопка&#187;</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/Chalarangelo/mini.css/v3.0.1/dist/mini-default.min.css">
+    {% block css %}{% endblock css %}
+</head>
+
+<body>
+    <header class="row">
+        <div class="col-sm">
+            <img id="logo" src="{% static 'img/logo_h75px.png' %}" alt="">
+        </div>
+        <div class="col-sm user">
+            {% if user.is_authenticated %}
+            <div class="row">
+                {% if user.avatar_path %}<div class="col-sm-5"><img src="{% static user.avatar_path %}" alt=""></div>{% endif %}
+                <div class="col-sm">
+                    <p><a href="{% url 'auth:userinfo' user.username %}">{{ user.username }}</a></p>
+                    <p><a href="{% url 'auth:logout' %}">Выйти</a></p>
+                </div>
+            </div>
+            {% else %}
+            <a href="{% url 'auth:reg' %}">Регистрация</a> | 
+            <a href="{% url 'auth:login' %}">Войти</a>
+            {% endif %}
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <nav class="col-sm-2">{% include 'menu.html' %}</nav>
+            <div class="main col-sm">
+                {% block content %}
+                {% endblock content %}
+            </div>
+        </div>
+    </div>
+    <footer>
+        {% block footer %}
+        <small>Все права защищены &#169; 2019</small>
+        {% endblock footer %}
+    </footer>
+</body>
+
+</html>

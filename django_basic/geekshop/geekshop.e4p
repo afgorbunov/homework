@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-5.1.dtd">
 <!-- eric project file for project geekshop -->
-<!-- Saved: 2019-04-22, 06:01:56 -->
+<!-- Saved: 2019-05-11, 04:28:17 -->
 <!-- Copyright (C) 2019 cauf,  -->
 <Project version="5.1">
   <Language>en_US</Language>
@@ -14,6 +14,18 @@
   <TranslationPattern>locale/%language%/LC_MESSAGES/django.po</TranslationPattern>
   <Eol index="0"/>
   <Sources>
+    <Source>authapp/__init__.py</Source>
+    <Source>authapp/admin.py</Source>
+    <Source>authapp/apps.py</Source>
+    <Source>authapp/forms.py</Source>
+    <Source>authapp/models.py</Source>
+    <Source>authapp/templates/authapp/login.html</Source>
+    <Source>authapp/templates/authapp/reg.html</Source>
+    <Source>authapp/templates/authapp/useredit.html</Source>
+    <Source>authapp/templates/authapp/userinfo.html</Source>
+    <Source>authapp/tests.py</Source>
+    <Source>authapp/urls.py</Source>
+    <Source>authapp/views.py</Source>
     <Source>geekshop/__init__.py</Source>
     <Source>geekshop/settings.py</Source>
     <Source>geekshop/urls.py</Source>
@@ -21,22 +33,31 @@
     <Source>mainapp/__init__.py</Source>
     <Source>mainapp/admin.py</Source>
     <Source>mainapp/apps.py</Source>
+    <Source>mainapp/load_json_2_db.py</Source>
+    <Source>mainapp/management/commands/create_categories.py</Source>
+    <Source>mainapp/management/commands/fill_db.py</Source>
+    <Source>mainapp/management/commands/gen_test_data.py</Source>
     <Source>mainapp/migrations/__init__.py</Source>
     <Source>mainapp/models.py</Source>
+    <Source>mainapp/templates/base.html</Source>
+    <Source>mainapp/templates/mainapp/catalog.html</Source>
     <Source>mainapp/templates/mainapp/contacts.html</Source>
     <Source>mainapp/templates/mainapp/index.html</Source>
-    <Source>mainapp/templates/mainapp/products.html</Source>
+    <Source>mainapp/templates/mainapp/item.html</Source>
+    <Source>mainapp/templates/menu.html</Source>
     <Source>mainapp/tests.py</Source>
+    <Source>mainapp/urls.py</Source>
     <Source>mainapp/views.py</Source>
     <Source>manage.py</Source>
   </Sources>
   <Forms>
+    <Form>mainapp/templates/mainapp/category.html</Form>
     <Form>mainapp/templates/mainapp/contacts.html</Form>
     <Form>mainapp/templates/mainapp/index.html</Form>
-    <Form>mainapp/templates/mainapp/products.html</Form>
   </Forms>
   <Others>
     <Other>static/css/style.css</Other>
+    <Other>static/goods.json</Other>
   </Others>
   <MainScript>geekshop/settings.py</MainScript>
   <Vcs>
