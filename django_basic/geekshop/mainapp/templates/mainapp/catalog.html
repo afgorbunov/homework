@@ -6,6 +6,35 @@
 
 {% block content %}
 <h1>Каталог товаров</h1>
+
+<div class="row">
+    <div class="card">
+        <h3 class="section">Горячее предложениe</h3>
+        <div class="section img">
+            <img src="{% static hot_good.get_image_path %}" alt="">
+        </div>
+        <div class="section title"><a href="{% url 'catalog:item' hot_good.pk %}">{{ hot_good.caption }}</a></div>
+        <div class="section">{{ hot_good.brief_description }}</div>
+        <div class="price section">{{ hot_good.str_price }}</div>
+        <div class="section button"><a href="{% url 'basket:add' hot_good.pk %}" class="buy">Купить</a></div>
+    </div>
+
+
+    {% for g in same_goods %}
+    <div class="card">
+
+        <h3 class="section">Похожее предложениe</h3>
+        <div class="section img">
+            <img src="{% static g.get_image_path %}" alt="">
+        </div>
+        <div class="section title"><a href="{% url 'catalog:item' g.pk %}">{{ g.caption }}</a></div>
+        <div class="section">{{ g.brief_description }}</div>
+        <div class="price section">{{ g.str_price }}</div>
+        <div class="section"><a href="{% url 'basket:add' g.pk %}" class="buy">Купить</a></div>
+    </div>
+    {% endfor %}
+</div>
+
 {% for cat, goods in data.items %}
 <h3><a href="{% url 'catalog:category' cat.id %}">Категория "{{ cat.caption }}"</a></h3>
 <div class="row">
