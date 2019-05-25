@@ -1,0 +1,27 @@
+{% extends 'adminapp/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<a href="{% url 'adminapp:good_create' %}" class="button">Новый товар</a>
+<table>
+    <thead>
+        <tr>
+            <th>Изображение</th>
+            <th>Название</th>
+            <th>Цена</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for g in goods %}
+        <tr>
+            <td><img src="{{ g.get_image_path }}" alt="" class="good_img"></td>
+            <td><a href="{% url 'adminapp:good_update' g.pk %}">{{g.caption}}</a></td>
+            <td>{{g.str_price}}</td>
+            <td><a href="{% url 'adminapp:good_delete' g.pk %}" class="button">Удалить</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

@@ -1,0 +1,12 @@
+
+{% if user.is_authenticated %}
+<div class="menuitem">
+    <a href="{% url 'adminapp:users' %}">Пользователи</a>
+</div>
+<div class="menuitem">
+    <a href="{% url 'adminapp:categories' %}">Категории</a>
+</div>
+<div class="menuitem">
+    <a href="{% url 'adminapp:goods' 1 %}">Товары</a>
+</div>
+{% endif %}

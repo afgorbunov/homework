@@ -1,3 +1,7 @@
+
+{% if user.is_authenticated and user.is_superuser %}
+<a href="{% url 'adminapp:home' %}">Админка</a>
+{% endif %}
 <a href="{% url 'main' %}">Главная</a>
 <a href="{% url 'catalog:index' %}">Каталог</a>
 <a href="{% url 'contacts' %}">Контакты</a>

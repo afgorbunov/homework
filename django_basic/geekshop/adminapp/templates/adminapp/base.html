@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock title %}Администрирование</title>
+    <link rel="stylesheet" href="https://unpkg.com/picnic">
+    <link rel="stylesheet" href="{% static 'css/admin_style.css' %}">
+</head>
+
+<body>
+    <div style="overflow: hidden;height: 55px;">
+
+        <nav>
+            <a href="{% url 'adminapp:home' %}" class="brand">
+                <img class="logo" src="{% static 'img/logo_h75px.png' %}" />
+                <span>Администрирование</span>
+            </a>
+
+            <!-- responsive-->
+            <input id="bmenub" type="checkbox" class="show">
+            <label for="bmenub" class="burger pseudo button">menu</label>
+
+            <div class="menu">
+                {% if user.is_authenticated %}
+                <span class="username">{{user.username}}</span>
+                <a href="{% url 'authapp:logout' %}" class="pseudo button">выйти</a>
+                {% else %}
+                <a href="{% url 'authapp:login' %}" class="pseudo button">войти</a>
+                {% endif %}
+            </div>
+        </nav>
+
+    </div>
+
+    <div class="flex six">
+        <div class="submenu">{% include "adminapp/admin_submenu.html" %}</div>
+        <div class="content half two-fifth">
+
+            {% block content %}
+
+            {% endblock content %}
+
+        </div>
+    </div>
+</body>
+
+</html>
