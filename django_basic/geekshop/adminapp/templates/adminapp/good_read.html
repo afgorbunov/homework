@@ -1,0 +1,11 @@
+{% extends 'adminapp/base.html' %}
+{% load static %}
+
+{% block content %}
+<h3>{{object.caption}}</h3>
+<p><img src="{% static object.get_image_path %}" alt=""></p>
+<p><strong>{{object.category.caption}}</strong></p>
+<p>{{object.brief_description}}</p>
+<p>{{object.full_description}}</p>
+<p>{{object.str_price}}</p>
+{% endblock content %}

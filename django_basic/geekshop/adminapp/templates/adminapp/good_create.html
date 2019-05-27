@@ -1,0 +1,9 @@
+{% extends 'adminapp/base.html' %}
+{% load static %}
+
+{% block content %}
+<form action="" method="post" enctype="multipart/form-data">
+    {{form.as_p}}
+    <input type="submit" value="Сохранить"> <a href="{% url 'adminapp:goods' 1 %}" class="button">Все товары</a>
+</form>
+{% endblock content %}

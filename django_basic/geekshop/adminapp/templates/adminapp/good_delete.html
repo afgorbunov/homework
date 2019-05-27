@@ -1,0 +1,10 @@
+{% extends 'adminapp/base.html' %}
+{% load static %}
+
+{% block content %}
+<form action="" method="post">
+{% csrf_token %}
+<p>Вы уверены, что хотите удалить объект "{{object.caption}}" из категории "{{object.category.caption}}"?</p>
+<input class="button" type="submit" value="Удалить">
+</form>
+{% endblock content %}

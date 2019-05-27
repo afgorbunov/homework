@@ -1,6 +1,11 @@
 from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
+from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
+from django.views.generic import DeleteView, DetailView
+from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.list import ListView
 from setuptools.command.setopt import edit_config
 
 from adminapp.forms import ShopUserAdminEditForm
@@ -16,70 +21,107 @@ def home(req):
 
 # ====================== USERS ======================
 
-@user_passes_test(lambda u: u.is_superuser)
-def user_create(req):
-    if req.method == 'POST':
-        user_form = ShopUserCreationForm(req.POST, req.FILES)
-        if user_form.is_valid():
-            user_form.save()
-            return HttpResponseRedirect(reverse('adminapp:users'))
-    else:
-        user_form = ShopUserCreationForm()
-    return render(req, 'adminapp/user_update.html', {'update_form': user_form, })
+
+class ShopUserCreateView(CreateView):
+    model = ShopUser
+    template_name = "adminapp/user_update.html"
+    fields = '__all__'
+
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def user_read(req):
-    users_list = ShopUser.objects.all().order_by(
-        '-is_active', '-is_superuser', '-is_staff', 'username')
-    return render(req, 'adminapp/users.html', {'objects': users_list})
+class ShopUserList(ListView):
+    model = ShopUser
+    context_object_name = ''
+    template_name = 'adminapp/users.html'
+
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def user_update(req, pk):
-    edit_user = get_object_or_404(ShopUser, pk=pk)
-    if req.method == 'POST':
-        edit_form = ShopUserAdminEditForm(
-            req.POST, req.FILES, instance=edit_user)
-        if edit_form.is_valid():
-            edit_form.save()
-            return HttpResponseRedirect(reverse('adminapp:user_update', args=[edit_user.pk]))
-    else:
-        edit_form = ShopUserAdminEditForm(instance=edit_user)
-    return render(req, 'adminapp/user_update.html', {'update_form': edit_form})
+class ShopUserUpdateView(UpdateView):
+    model = ShopUser
+    template_name = "adminapp/user_update.html"
+    fields = '__all__'
+
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def user_delete(req, pk):
-    user = get_object_or_404(ShopUser, pk=pk)
-    if req.method == 'POST':
-        user.is_active = False
-        user.save()
-        return HttpResponseRedirect(reverse('adminapp:users'))
-    return render(req, 'adminapp/user_delete.html', {'user_to_delete': user})
+class ShopUserDeleteView(DeleteView):
+    model = ShopUser
+    template_name = "adminapp/user_delete.html"
+    success_url = reverse_lazy('adminapp:users')
+
+    def delete(self, req, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.is_active = False
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
 
 # ====================== CATEGORIES ======================
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def categories(req):
-    categories_list = GoodsCategory.objects.all()
-    return render(req, 'adminapp/categories.html', {'objects': categories_list})
+class GoodsCategoryListView(ListView):
+    model = GoodsCategory
+    template_name = "adminapp/categories.html"
+
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def category_create(req):
-    pass
+class GoodsCategoryCreateView(CreateView):
+    model = GoodsCategory
+    template_name = "adminapp/category_update.html"
+    success_url = reverse_lazy('adminapp:categories')
+    fields = '__all__'
+
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def category_update(req, pk):
-    pass
+class GoodsCategoryUpdateView(UpdateView):
+    model = GoodsCategory
+    template_name = "adminapp/category_update.html"
+    success_url = reverse_lazy('adminapp:categories')
+    fields = '__all__'
+
+    def get_cotext_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'категории / редактирование'
+        return context
+
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def category_delete(req, pk):
-    pass
+class GoodsCategoryDeleteView(DeleteView):
+    model = GoodsCategory
+    template_name = "adminapp/category_delete.html"
+    success_url = reverse_lazy('adminapp:categories')
+
+    def delete(self, req, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.is_active = False
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
 
 # ====================== GOODS ======================
 
@@ -94,21 +136,46 @@ def goods(req, pk):
     })
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def good_create(req):
-    pass
+class GoodCreateView(CreateView):
+    model = Good
+    template_name = "adminapp/good_create.html"
+    fields = '__all__'
+
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def good_read(req, pk):
-    pass
+class GoodDetailView(DetailView):
+    model = Good
+    template_name = "adminapp/good_read.html"
+
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def good_update(req, pk):
-    pass
+class GoodUpdateView(UpdateView):
+    model = Good
+    template_name = "adminapp/good_create.html"
+    fields = '__all__'
+
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def good_delete(req, pk):
-    pass
+class GoodDeleteView(DeleteView):
+    model = Good
+    template_name = "adminapp/good_delete.html"
+    success_url = reverse_lazy('adminapp:goods', kwargs={'pk': 1})
+
+    def delete(self, req, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.is_active = False
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)

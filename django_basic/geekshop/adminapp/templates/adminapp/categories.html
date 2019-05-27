@@ -14,7 +14,7 @@
     </thead>
     <tbody>
 
-        {% for ob in objects %}
+        {% for ob in object_list %}
         <tr>
             <td>{{ ob.pk }}</td>
             <td><a href="{% url 'adminapp:category_update' ob.pk %}">{{ ob.caption }}</a></td>

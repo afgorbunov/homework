@@ -16,10 +16,14 @@
     <tbody>
         {% for g in goods %}
         <tr>
-            <td><img src="{{ g.get_image_path }}" alt="" class="good_img"></td>
+            <td><img src="{{ g.get_image_path|media_folder_goods }}" alt="" class="good_img"></td>
             <td><a href="{% url 'adminapp:good_update' g.pk %}">{{g.caption}}</a></td>
             <td>{{g.str_price}}</td>
-            <td><a href="{% url 'adminapp:good_delete' g.pk %}" class="button">Удалить</a></td>
+            <td>
+            <a href="{% url 'adminapp:good_read' g.pk %}" class="button">Просмотр</a>
+            <a href="{% url 'adminapp:good_update' g.pk %}" class="button">Редактировать</a>
+            <a href="{% url 'adminapp:good_delete' g.pk %}" class="button">Удалить</a>
+            </td>
         </tr>
         {% endfor %}
     </tbody>
